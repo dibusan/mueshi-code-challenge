@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:15.4-alpine3.18
+    container_name: postgres_b
+    volumes:
+      - postgres_b:/var/lib/postgresql/data
+    ports:
+      - 54322:5432
+    restart: always
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+      POSTGRES_DB: postgres
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256 --auth-local=scram-sha-256
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+  pgadmin4:
+    image: dpage/pgadmin4:7.7
+    container_name: pgadmin4
+    volumes:
+      - pgadmin4:/var/lib/pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.net
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 8080:80
+volumes:
+  postgres_b:
+  pgadmin4:
