@@ -65,6 +65,8 @@ model Order {
   storeId    String // Foreign Key to Store
   store      Store       @relation("StoreToOrder", fields: [storeId], references: [id])
   orderItems OrderItem[] // Relation to OrderItem model
+  status     String      @default("PENDING")
+  value      Decimal
   isPaid     Boolean     @default(false)
   phone      String      @default("")
   address    String      @default("")

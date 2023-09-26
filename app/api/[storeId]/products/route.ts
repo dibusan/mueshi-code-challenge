@@ -75,17 +75,15 @@ export async function GET(
     }
 
     const products = await prismadb.product.findMany({
-      where: {
-        storeId: params.storeId,
-        // isFeatured: isFeatured ? true : undefined,
-        // isArchived: false,
-      },
-      include: {
-        images: true,
-      },
-      orderBy: {
-        createdAt: 'desc',
-      }
+    //   where: {
+    //     storeId: params.storeId,
+    //   },
+    //   include: {
+    //     images: true,
+    //   },
+    //   orderBy: {
+    //     createdAt: 'desc',
+    //   }
     });
   
     return NextResponse.json(products);
